@@ -11261,7 +11261,7 @@ textarea.form-control-lg {
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: 100;
+  z-index: 0;
   /* Behind the navbar */
   padding: 120px 0 0;
   /* Height of navbar */
@@ -11338,4 +11338,12 @@ textarea.form-control-lg {
 .form-control-dark:focus {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+
+.dropdown-menu {
+  z-index: 2;
+}
+
+.sticky-top {
+  z-index: 1;
 }
