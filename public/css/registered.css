@@ -11343,41 +11343,8 @@ textarea.form-control-lg {
   z-index: 1;
 }
 
-.link_adv {
-  text-decoration: none;
-  color: #31858f;
-  padding: 0.2rem 1rem;
-  background-color: #f8fafc;
-  border: 1px solid #ced4da;
-  font-weight: 600;
-  font-size: 13px;
-  font-family: inter;
-  border-radius: 50px;
-}
-
-.search_bar {
-  width: 250px;
-  height: 40px;
-  border-radius: 50px;
-  background-color: #f8fafc;
-  border: 1px solid #ced4da;
-}
-.search_bar input:focus {
-  box-shadow: none;
-}
-.search_bar .search {
-  border-radius: 50px;
-  border: none;
-  transition: none;
-  background-color: rgba(0, 0, 0, 0);
-}
-.search_bar .search_icon {
-  color: white;
+.bg-azure {
   background-color: #31858f;
-  padding: 1rem 0.5rem;
-  border-radius: 100px;
-  margin-right: 5px;
-  cursor: pointer;
 }
 
 .hover_blue:hover {
