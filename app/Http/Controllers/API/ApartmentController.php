@@ -14,13 +14,34 @@ class ApartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // return Apartment::with(['services'])->paginate(5);
 
         /* per personalizzarci la risposta */
-        return ApartmentResource::collection(Apartment::with(['services'])->paginate(5));
+        //function($query){$query->where('addres', request('address'))};
+
+        /*  // return Apartment::with(['services'])->paginate(5);
+
+        /* per personalizzarci la risposta */
+        //function($query){$query->where('addres', request('address'))};
+
+
+        //$apart = Apartment::where('address', 'like', 'Powlowski');
+        //return ApartmentResource::collection($apart); */
+        //ddd($request->userinput);
+        //if ($request->ajax()) {
+
+        //ddd($request->all());
+
+        $aparts = Apartment::where('address', request('address'))->get();
+        //$apart = Apartment::where('address', 'Via Carlo Pisacane 36, 01100 Viterbo')->get();
+        // }
+        return ApartmentResource::collection($aparts);
+
+        //return ApartmentResource::collection(Apartment::with(['services'])->paginate(5));
     }
+
 
     /**
      * Show the form for creating a new resource.

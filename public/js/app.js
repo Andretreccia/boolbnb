@@ -5113,42 +5113,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      pippo: "",
-      pippoutente: ""
+      pippo: [],
+      userInput: ""
     };
   },
   methods: {
-    pippofunction: function pippofunction() {
+    searchFunction: function searchFunction() {
       var _this = this;
 
-      console.log('pippo function consolelog');
-      axios.get("" + this.pippoutente).then(function (response) {
+      /* console.log(this.pippoutente)
+      console.log('pippo function consolelog') */
+      console.log(this.userInput);
+      axios //.get('/api/apartments' + '?address=' + this.userInput )
+      //.get(`/api/apartments?address=${this.userinput}`
+      .get('/api/apartments?address=' + this.userInput).then(function (response) {
         _this.pippo = response.data;
+        console.log(_this.pippo);
       })["catch"](function (error) {
         console.log(error, "Pippo non funge fra");
       });
-    },
-    mounted: function mounted() {
-      console.log('W PIPPO');
     }
   }
 });
+/*appunti prima di iniziare
+
+Per soddisfare il fatto che non si deve avere un refresh della pagina della ricerca bisogna fare chiamate delle ajax. 
+Il metodo più utilizzato in questi casi è fare in modo che ogni cambiamento di input vada a modificare i campi utili alla ricerca nell’url es (/ricerca?tipologia=cinese). 
+Dopo ogni cambiamento viene fatta una chiamata ajax con i parametri presenti nella URL.
+
+
+
+
+
+
+
+
+
+  */
 
 /***/ }),
 
@@ -41402,43 +41406,40 @@ var render = function () {
         _c("div", { staticClass: "card" }, [
           _c("h1", [_vm._v("TESTIAMO IL COMPONENTE")]),
           _vm._v(" "),
-          _c("form", { staticClass: "d-flex me-5" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.pippoutente,
-                  expression: "pippoutente",
-                },
-              ],
-              staticClass: "form-control mr-sm-2",
-              attrs: { type: "search", placeholder: "fai una ricerca" },
-              domProps: { value: _vm.pippoutente },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.pippoutente = $event.target.value
-                },
-              },
-            }),
-            _vm._v(" "),
-            _c(
-              "button",
+          _c("input", {
+            directives: [
               {
-                staticClass: "btn btn-primary my-2 my-sm-0",
-                attrs: { type: "submit" },
-                on: {
-                  click: function ($event) {
-                    return _vm.pippofunction()
-                  },
+                name: "model",
+                rawName: "v-model",
+                value: _vm.userInput,
+                expression: "userInput",
+              },
+            ],
+            staticClass: "form-control mr-sm-2",
+            attrs: { type: "text", placeholder: "fai una ricerca" },
+            domProps: { value: _vm.userInput },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.userInput = $event.target.value
+              },
+            },
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary my-2 my-sm-0",
+              on: {
+                click: function ($event) {
+                  return _vm.searchFunction()
                 },
               },
-              [_vm._v("\n                    Search\n                    ")]
-            ),
-          ]),
+            },
+            [_vm._v(" Search ")]
+          ),
         ]),
       ]),
     ]),
