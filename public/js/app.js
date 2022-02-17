@@ -5113,11 +5113,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       pippo: [],
-      userInput: ""
+      userInput: "",
+      n_bathroom: "",
+      n_rooms: ""
     };
   },
   methods: {
@@ -5125,16 +5175,31 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       /* console.log(this.pippoutente)
-      console.log('pippo function consolelog') */
+          console.log('pippo function consolelog') */
       console.log(this.userInput);
       axios //.get('/api/apartments' + '?address=' + this.userInput )
       //.get(`/api/apartments?address=${this.userinput}`
-      .get('/api/apartments?address=' + this.userInput).then(function (response) {
+      .get(
+      /*  "/api/apartments?n_rooms=" +
+          //this.n_bathroom +
+          "&n_rooms=" +
+          this.n_rooms */
+      "/api/apartments?\n                    n_rooms=".concat(this.n_rooms, "\n                    &n_bathroom=").concat(this.n_bathroom)).then(function (response) {
         _this.pippo = response.data;
         console.log(_this.pippo);
       })["catch"](function (error) {
         console.log(error, "Pippo non funge fra");
       });
+    },
+    searchFunction2: function searchFunction2() {
+      //axios;
+      //.get("/api/apartments")
+      //.then((response) => {
+      //this.pippo = response.data;
+      console.log(this.n_rooms); //})
+      //.catch((error) => {
+      // console.log(error, "Pippo non funge fra");
+      //});
     }
   }
 });
@@ -41438,8 +41503,115 @@ var render = function () {
                 },
               },
             },
-            [_vm._v(" Search ")]
+            [_vm._v("\n                    Search\n                ")]
           ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              on: {
+                click: function ($event) {
+                  return _vm.searchFunction2()
+                },
+              },
+            },
+            [_vm._v("\n                    ALL apartments\n                ")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "d-flex flex-wrap" }, [
+            _c(
+              "div",
+              {
+                staticClass: "mx-2 mb-3",
+                staticStyle: { "max-width": "70px" },
+              },
+              [
+                _c(
+                  "label",
+                  { staticClass: "form-label", attrs: { for: "n_rooms" } },
+                  [_vm._v("\n                            n Camere min")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.n_rooms,
+                      expression: "n_rooms",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    min: "0",
+                    max: "200",
+                    name: "n_rooms",
+                    id: "n_rooms",
+                    "aria-describedby": "n_roomsHelper",
+                    placeholder: "0",
+                  },
+                  domProps: { value: _vm.n_rooms },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.n_rooms = $event.target.value
+                    },
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "mx-2 mb-3",
+                staticStyle: { "max-width": "70px" },
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-label",
+                    attrs: { for: "square_meters" },
+                  },
+                  [_vm._v("n Bagni min")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.n_bathroom,
+                      expression: "n_bathroom",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    min: "0",
+                    max: "5000",
+                    name: "n_bathroom",
+                    id: "n_bathroom",
+                    "aria-describedby": "n_bathroomHelper",
+                    placeholder: "0",
+                  },
+                  domProps: { value: _vm.n_bathroom },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.n_bathroom = $event.target.value
+                    },
+                  },
+                }),
+              ]
+            ),
+          ]),
         ]),
       ]),
     ]),

@@ -32,11 +32,14 @@ class ApartmentController extends Controller
         //ddd($request->userinput);
         //if ($request->ajax()) {
 
-        //ddd($request->all());
 
-        $aparts = Apartment::where('address', request('address'))->get();
         //$apart = Apartment::where('address', 'Via Carlo Pisacane 36, 01100 Viterbo')->get();
         // }
+        //SELECT * FROM 'apartments' WHERE 'n_bathroom' > request
+
+        $aparts = Apartment::where('n_rooms', '>', intval(request('n_rooms')))
+            ->where('n_bathroom', '>', intval(request('n_bathroom')))
+            ->get();
         return ApartmentResource::collection($aparts);
 
         //return ApartmentResource::collection(Apartment::with(['services'])->paginate(5));
