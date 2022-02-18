@@ -5161,14 +5161,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       pippo: [],
       userInput: "",
       n_bathroom: "",
-      n_rooms: ""
+      n_rooms: "",
+      v_services: []
     };
+  },
+  props: {
+    services: Array
   },
   methods: {
     searchFunction: function searchFunction() {
@@ -5184,29 +5209,27 @@ __webpack_require__.r(__webpack_exports__);
           //this.n_bathroom +
           "&n_rooms=" +
           this.n_rooms */
-      "/api/apartments?\n                    n_rooms=".concat(this.n_rooms, "\n                    &n_bathroom=").concat(this.n_bathroom)).then(function (response) {
+      "/api/apartments?address=".concat(this.userInput, "&n_rooms=").concat(this.n_rooms, "&n_bathroom=").concat(this.n_bathroom)).then(function (response) {
         _this.pippo = response.data;
         console.log(_this.pippo);
+        console.log(_this.n_rooms);
+        console.log(_this.n_rooms);
       })["catch"](function (error) {
         console.log(error, "Pippo non funge fra");
       });
     },
-    searchFunction2: function searchFunction2() {
-      //axios;
-      //.get("/api/apartments")
-      //.then((response) => {
-      //this.pippo = response.data;
-      console.log(this.n_rooms); //})
-      //.catch((error) => {
-      // console.log(error, "Pippo non funge fra");
-      //});
+    serviceFunction: function serviceFunction() {
+      console.log(this.v_services);
+    },
+    pippoFunction: function pippoFunction(i) {
+      console.log(this.service[i]);
     }
   }
 });
 /*appunti prima di iniziare
 
-Per soddisfare il fatto che non si deve avere un refresh della pagina della ricerca bisogna fare chiamate delle ajax. 
-Il metodo più utilizzato in questi casi è fare in modo che ogni cambiamento di input vada a modificare i campi utili alla ricerca nell’url es (/ricerca?tipologia=cinese). 
+Per soddisfare il fatto che non si deve avere un refresh della pagina della ricerca bisogna fare chiamate delle ajax.
+Il metodo più utilizzato in questi casi è fare in modo che ogni cambiamento di input vada a modificare i campi utili alla ricerca nell’url es (/ricerca?tipologia=cinese).
 Dopo ogni cambiamento viene fatta una chiamata ajax con i parametri presenti nella URL.
 
 
@@ -41511,11 +41534,11 @@ var render = function () {
             {
               on: {
                 click: function ($event) {
-                  return _vm.searchFunction2()
+                  return _vm.serviceFunction()
                 },
               },
             },
-            [_vm._v("\n                    ALL apartments\n                ")]
+            [_vm._v("\n                    click di prova\n                ")]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "d-flex flex-wrap" }, [
@@ -41610,6 +41633,72 @@ var render = function () {
                   },
                 }),
               ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              _vm._l(_vm.services, function (service) {
+                return _c("div", { key: service.id, staticClass: "mb-3" }, [
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.v_services,
+                          expression: "v_services",
+                        },
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "checkbox",
+                        name: service.name,
+                        id: service.id,
+                      },
+                      domProps: {
+                        value: service.id,
+                        checked: Array.isArray(_vm.v_services)
+                          ? _vm._i(_vm.v_services, service.id) > -1
+                          : _vm.v_services,
+                      },
+                      on: {
+                        change: function ($event) {
+                          var $$a = _vm.v_services,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = service.id,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 && (_vm.v_services = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.v_services = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.v_services = $$c
+                          }
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "form-check-label", attrs: { for: "" } },
+                      [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(service.name) +
+                            "\n                                "
+                        ),
+                      ]
+                    ),
+                  ]),
+                ])
+              }),
+              0
             ),
           ]),
         ]),

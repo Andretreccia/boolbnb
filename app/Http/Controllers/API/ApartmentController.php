@@ -37,12 +37,15 @@ class ApartmentController extends Controller
         // }
         //SELECT * FROM 'apartments' WHERE 'n_bathroom' > request
 
-        $aparts = Apartment::where('n_rooms', '>', intval(request('n_rooms')))
+        $aparts = Apartment::with(['services'])
+
+            ->where('address', 'like', "%" . request('address') . "%")
+            ->where('n_rooms', '>', intval(request('n_rooms')))
             ->where('n_bathroom', '>', intval(request('n_bathroom')))
             ->get();
         return ApartmentResource::collection($aparts);
 
-        //return ApartmentResource::collection(Apartment::with(['services'])->paginate(5));
+        //return ApartmentResource::collection(Apartment::with(['services'])->paginate(20));
     }
 
 

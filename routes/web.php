@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,14 +19,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Guest\ApartmentController@index')->name('hompepageGuest');
 
-Route::get('research', function () { return view('guest.advancedSearch.index');})->name('advanced.search');
-
-
-
+Route::get('research', function () {
+    $services = Service::all();
+    //ddd($services);
+    return view('guest.advancedSearch.index', compact('services'));
+})->name('advanced.search');
 
 Auth::routes();
 
-Route::namespace('Guest')->prefix('guest')->name('guest.')->group(function(){
+Route::namespace('Guest')->prefix('guest')->name('guest.')->group(function () {
     Route::get('apartments/{apartment:slug}', 'ApartmentController@show')->name('apartments.show');
 });
 

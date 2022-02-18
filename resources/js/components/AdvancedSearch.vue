@@ -17,8 +17,8 @@
                         Search
                     </button>
 
-                    <button class="" @click="searchFunction2()">
-                        ALL apartments
+                    <button class="" @click="serviceFunction()">
+                        click di prova
                     </button>
 
                     <div class="d-flex flex-wrap">
@@ -54,6 +54,27 @@
                                 v-model="n_bathroom"
                             />
                         </div>
+                        <div>
+                            <div
+                                class="mb-3"
+                                v-for="service in services"
+                                v-bind:key="service.id"
+                            >
+                                <div class="form-check">
+                                    <input
+                                        type="checkbox"
+                                        class="form-check-input"
+                                        :name="service.name"
+                                        :id="service.id"
+                                        :value="service.id"
+                                        v-model="v_services"
+                                    />
+                                    <label class="form-check-label" for="">
+                                        {{ service.name }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,8 +90,10 @@ export default {
             userInput: "",
             n_bathroom: "",
             n_rooms: "",
+            v_services: [],
         };
     },
+    props: { services: Array },
     methods: {
         searchFunction() {
             /* console.log(this.pippoutente)
@@ -84,35 +107,30 @@ export default {
                         //this.n_bathroom +
                         "&n_rooms=" +
                         this.n_rooms */
-                    `/api/apartments?
-                    n_rooms=${this.n_rooms}
-                    &n_bathroom=${this.n_bathroom}`
+                    `/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bathroom=${this.n_bathroom}`
                 )
                 .then((response) => {
                     this.pippo = response.data;
                     console.log(this.pippo);
+                    console.log(this.n_rooms);
+                    console.log(this.n_rooms);
                 })
                 .catch((error) => {
                     console.log(error, "Pippo non funge fra");
                 });
         },
-        searchFunction2() {
-            //axios;
-            //.get("/api/apartments")
-            //.then((response) => {
-            //this.pippo = response.data;
-            console.log(this.n_rooms);
-            //})
-            //.catch((error) => {
-            // console.log(error, "Pippo non funge fra");
-            //});
+        serviceFunction() {
+            console.log(this.v_services);
+        },
+        pippoFunction(i) {
+            console.log(this.service[i]);
         },
     },
 };
 /*appunti prima di iniziare
 
-Per soddisfare il fatto che non si deve avere un refresh della pagina della ricerca bisogna fare chiamate delle ajax. 
-Il metodo più utilizzato in questi casi è fare in modo che ogni cambiamento di input vada a modificare i campi utili alla ricerca nell’url es (/ricerca?tipologia=cinese). 
+Per soddisfare il fatto che non si deve avere un refresh della pagina della ricerca bisogna fare chiamate delle ajax.
+Il metodo più utilizzato in questi casi è fare in modo che ogni cambiamento di input vada a modificare i campi utili alla ricerca nell’url es (/ricerca?tipologia=cinese).
 Dopo ogni cambiamento viene fatta una chiamata ajax con i parametri presenti nella URL.
 
 
