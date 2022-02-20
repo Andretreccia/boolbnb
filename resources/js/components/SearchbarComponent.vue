@@ -1,8 +1,11 @@
 <template>
-    <div id="searchbar" class="w-75"></div>
+    <div id="searchbar" class="w-75">
+        <button @click="sendFunction()">cLick per inviare</button>
+    </div>
 </template>
 
 <script>
+import { Bus } from "../app";
 export default {
     data() {
         return {
@@ -11,6 +14,7 @@ export default {
                 lat: null,
                 lon: null,
             },
+            pippot: "stringa di pippo",
         };
     },
 
@@ -44,10 +48,15 @@ export default {
                     "lon",
                     data.data.result.position.lng
                 );
-                console.log(this.coordinates);
+                //console.log(this.coordinates);
             });
         },
+        sendFunction() {
+            Bus.$emit("sendCoordinates", this.coordinates);
+            console.log("click");
+        },
     },
+
     mounted() {
         this.createSearchbox();
     },

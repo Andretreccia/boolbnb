@@ -108,6 +108,7 @@
 </template>
 
 <script>
+import { Bus } from "../app";
 export default {
     data() {
         return {
@@ -116,13 +117,12 @@ export default {
             n_bathroom: "",
             n_rooms: "",
             v_services: [],
-            coordinates: {
-                lat: null,
-                lon: null,
-            },
+            coordinates: {},
+            pippo: null,
         };
     },
     props: { services: Array },
+
     methods: {
         searchFunction() {
             /* console.log(this.pippoutente)
@@ -150,11 +150,17 @@ export default {
                 });
         },
         serviceFunction() {
-            console.log(this.v_services);
+            console.log(this.coordinates);
         },
         pippoFunction(i) {
             console.log(this.service[i]);
         },
+    },
+    created() {
+        Bus.$on("sendCoordinates", (data) => {
+            this.coordinates = data;
+        });
+        console.log(this.coordinates);
     },
 };
 /*appunti prima di iniziare

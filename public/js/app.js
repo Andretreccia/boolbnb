@@ -5098,6 +5098,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./resources/js/app.js");
 //
 //
 //
@@ -5207,6 +5208,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5215,10 +5217,8 @@ __webpack_require__.r(__webpack_exports__);
       n_bathroom: "",
       n_rooms: "",
       v_services: [],
-      coordinates: {
-        lat: null,
-        lon: null
-      }
+      coordinates: {},
+      pippo: null
     };
   },
   props: {
@@ -5249,11 +5249,19 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     serviceFunction: function serviceFunction() {
-      console.log(this.v_services);
+      console.log(this.coordinates);
     },
     pippoFunction: function pippoFunction(i) {
       console.log(this.service[i]);
     }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    _app__WEBPACK_IMPORTED_MODULE_0__["Bus"].$on("sendCoordinates", function (data) {
+      _this2.coordinates = data;
+    });
+    console.log(this.coordinates);
   }
 });
 /*appunti prima di iniziare
@@ -5283,10 +5291,14 @@ Dopo ogni cambiamento viene fatta una chiamata ajax con i parametri presenti nel
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./resources/js/app.js");
 //
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5294,7 +5306,8 @@ __webpack_require__.r(__webpack_exports__);
       coordinates: {
         lat: null,
         lon: null
-      }
+      },
+      pippot: "stringa di pippo"
     };
   },
   methods: {
@@ -5320,10 +5333,13 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$set(_this.coordinates, "lat", data.data.result.position.lat);
 
-        _this.$set(_this.coordinates, "lon", data.data.result.position.lng);
+        _this.$set(_this.coordinates, "lon", data.data.result.position.lng); //console.log(this.coordinates);
 
-        console.log(_this.coordinates);
       });
+    },
+    sendFunction: function sendFunction() {
+      _app__WEBPACK_IMPORTED_MODULE_0__["Bus"].$emit("sendCoordinates", this.coordinates);
+      console.log("click");
     }
   },
   mounted: function mounted() {
@@ -41870,7 +41886,19 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "w-75", attrs: { id: "searchbar" } })
+  return _c("div", { staticClass: "w-75", attrs: { id: "searchbar" } }, [
+    _c(
+      "button",
+      {
+        on: {
+          click: function ($event) {
+            return _vm.sendFunction()
+          },
+        },
+      },
+      [_vm._v("cLick per inviare")]
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -54094,14 +54122,21 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: Bus */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bus", function() { return Bus; });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -54115,15 +54150,16 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('advanced-search', __webpack_require__(/*! ./components/AdvancedSearch.vue */ "./resources/js/components/AdvancedSearch.vue")["default"]);
-Vue.component('searchbarComponent', __webpack_require__(/*! ./components/SearchbarComponent.vue */ "./resources/js/components/SearchbarComponent.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('advanced-search', __webpack_require__(/*! ./components/AdvancedSearch.vue */ "./resources/js/components/AdvancedSearch.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('searchbarComponent', __webpack_require__(/*! ./components/SearchbarComponent.vue */ "./resources/js/components/SearchbarComponent.vue")["default"]);
+var Bus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
+var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app'
 });
 
