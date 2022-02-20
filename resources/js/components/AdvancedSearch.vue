@@ -79,6 +79,31 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <a
+                href="#"
+                class="card justify-content-between card_promo m-3"
+                v-for="apartment in apartments"
+                :key="apartment.id"
+            >
+                <img
+                    class="card-img-top thumb"
+                    :src="'storage/' + apartment.image"
+                    alt="Card image cap"
+                />
+                <p class="promo">Promotion</p>
+                <h2 class="card-text m-3 card_title">{{ apartment.title }}</h2>
+                <div class="box">
+                    <p class="card-text m-3">{{ apartment.description }}</p>
+                </div>
+
+                <div
+                    class="button_details p-2 w-50 justify-content-center align-items-center text-center text-white m-auto mt-4 mb-4"
+                >
+                    <span>View details</span>
+                </div>
+            </a>
+        </div>
     </div>
 </template>
 
@@ -86,7 +111,7 @@
 export default {
     data() {
         return {
-            pippo: [],
+            apartments: [],
             userInput: "",
             n_bathroom: "",
             n_rooms: "",
@@ -107,11 +132,12 @@ export default {
                         //this.n_bathroom +
                         "&n_rooms=" +
                         this.n_rooms */
-                    `/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bathroom=${this.n_bathroom}`
+                    //`/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bathroom=${this.n_bathroom}`
+                    `/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bathroom=${this.n_bathroom}&services=${this.v_services}`
                 )
                 .then((response) => {
-                    this.pippo = response.data;
-                    console.log(this.pippo);
+                    this.apartments = response.data.data;
+                    console.log(this.apartments);
                     console.log(this.n_rooms);
                     console.log(this.n_rooms);
                 })

@@ -5182,10 +5182,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      pippo: [],
+      apartments: [],
       userInput: "",
       n_bathroom: "",
       n_rooms: "",
@@ -5209,9 +5234,10 @@ __webpack_require__.r(__webpack_exports__);
           //this.n_bathroom +
           "&n_rooms=" +
           this.n_rooms */
-      "/api/apartments?address=".concat(this.userInput, "&n_rooms=").concat(this.n_rooms, "&n_bathroom=").concat(this.n_bathroom)).then(function (response) {
-        _this.pippo = response.data;
-        console.log(_this.pippo);
+      //`/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bathroom=${this.n_bathroom}`
+      "/api/apartments?address=".concat(this.userInput, "&n_rooms=").concat(this.n_rooms, "&n_bathroom=").concat(this.n_bathroom, "&services=").concat(this.v_services)).then(function (response) {
+        _this.apartments = response.data.data;
+        console.log(_this.apartments);
         console.log(_this.n_rooms);
         console.log(_this.n_rooms);
       })["catch"](function (error) {
@@ -41704,9 +41730,62 @@ var render = function () {
         ]),
       ]),
     ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row" },
+      _vm._l(_vm.apartments, function (apartment) {
+        return _c(
+          "a",
+          {
+            key: apartment.id,
+            staticClass: "card justify-content-between card_promo m-3",
+            attrs: { href: "#" },
+          },
+          [
+            _c("img", {
+              staticClass: "card-img-top thumb",
+              attrs: {
+                src: "storage/" + apartment.image,
+                alt: "Card image cap",
+              },
+            }),
+            _vm._v(" "),
+            _c("p", { staticClass: "promo" }, [_vm._v("Promotion")]),
+            _vm._v(" "),
+            _c("h2", { staticClass: "card-text m-3 card_title" }, [
+              _vm._v(_vm._s(apartment.title)),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "box" }, [
+              _c("p", { staticClass: "card-text m-3" }, [
+                _vm._v(_vm._s(apartment.description)),
+              ]),
+            ]),
+            _vm._v(" "),
+            _vm._m(0, true),
+          ]
+        )
+      }),
+      0
+    ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "button_details p-2 w-50 justify-content-center align-items-center text-center text-white m-auto mt-4 mb-4",
+      },
+      [_c("span", [_vm._v("View details")])]
+    )
+  },
+]
 render._withStripped = true
 
 

@@ -16,36 +16,36 @@ class ApartmentController extends Controller
      */
     public function index(Request $request)
     {
-        // return Apartment::with(['services'])->paginate(5);
-
-        /* per personalizzarci la risposta */
-        //function($query){$query->where('addres', request('address'))};
-
-        /*  // return Apartment::with(['services'])->paginate(5);
-
-        /* per personalizzarci la risposta */
-        //function($query){$query->where('addres', request('address'))};
 
 
-        //$apart = Apartment::where('address', 'like', 'Powlowski');
-        //return ApartmentResource::collection($apart); */
-        //ddd($request->userinput);
-        //if ($request->ajax()) {
-
-
-        //$apart = Apartment::where('address', 'Via Carlo Pisacane 36, 01100 Viterbo')->get();
-        // }
-        //SELECT * FROM 'apartments' WHERE 'n_bathroom' > request
-
-        $aparts = Apartment::with(['services'])
+        /* $aparts = Apartment::with(['services'])
 
             ->where('address', 'like', "%" . request('address') . "%")
             ->where('n_rooms', '>', intval(request('n_rooms')))
             ->where('n_bathroom', '>', intval(request('n_bathroom')))
             ->get();
-        return ApartmentResource::collection($aparts);
+        return ApartmentResource::collection($aparts); */
 
         //return ApartmentResource::collection(Apartment::with(['services'])->paginate(20));
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+
+        //Alternative  Giuseppe method
+
+        $requestQuery = $request->query();
+        $reqServices = explode(',', $request->services);
+
+        $aparts = Apartment::where('n_bathroom', '>', $requestQuery['n_bathroom'])
+            ->where('n_rooms', '>', $requestQuery['n_rooms'])
+            ->get();
+
+        if (!empty($request->services)) {
+            $aparts = Apartment::whereHas('services', function ($param) use ($reqServices) {
+                $param->whereIn('service_id', $reqServices);
+            })->get();
+        }
+
+        return ApartmentResource::collection($aparts);
     }
 
 
