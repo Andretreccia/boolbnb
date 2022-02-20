@@ -116,6 +116,10 @@ export default {
             n_bathroom: "",
             n_rooms: "",
             v_services: [],
+            coordinates: {
+                lat: null,
+                lon: null,
+            },
         };
     },
     props: { services: Array },
