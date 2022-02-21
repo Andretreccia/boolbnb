@@ -5099,6 +5099,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./resources/js/app.js");
 //
 //
 //
@@ -5183,14 +5184,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      pippo: [],
+      apartments: [],
       userInput: "",
-      n_bathroom: "",
+      n_bed: "",
       n_rooms: "",
-      v_services: []
+      v_services: [],
+      coordinates: {},
+      distance: null
     };
   },
   props: {
@@ -5200,31 +5245,27 @@ __webpack_require__.r(__webpack_exports__);
     searchFunction: function searchFunction() {
       var _this = this;
 
-      /* console.log(this.pippoutente)
-          console.log('pippo function consolelog') */
       console.log(this.userInput);
-      axios //.get('/api/apartments' + '?address=' + this.userInput )
-      //.get(`/api/apartments?address=${this.userinput}`
-      .get(
-      /*  "/api/apartments?n_rooms=" +
-          //this.n_bathroom +
-          "&n_rooms=" +
-          this.n_rooms */
-      "/api/apartments?address=".concat(this.userInput, "&n_rooms=").concat(this.n_rooms, "&n_bathroom=").concat(this.n_bathroom)).then(function (response) {
-        _this.pippo = response.data;
-        console.log(_this.pippo);
+      axios.get("/api/apartments?address=".concat(this.userInput, "&n_rooms=").concat(this.n_rooms, "&n_bed=").concat(this.n_bed, "&services=").concat(this.v_services, "&latitude=").concat(this.coordinates.lat, "&longitude=").concat(this.coordinates.lon, "&distance=").concat(this.distance)).then(function (response) {
+        _this.apartments = response.data.data;
+        console.log(_this.apartments);
         console.log(_this.n_rooms);
         console.log(_this.n_rooms);
       })["catch"](function (error) {
-        console.log(error, "Pippo non funge fra");
+        console.log(error, "non funziona");
       });
     },
     serviceFunction: function serviceFunction() {
-      console.log(this.v_services);
-    },
-    pippoFunction: function pippoFunction(i) {
-      console.log(this.service[i]);
+      console.log(this.coordinates);
     }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    _app__WEBPACK_IMPORTED_MODULE_0__["Bus"].$on("sendCoordinates", function (data) {
+      _this2.coordinates = data;
+    });
+    console.log(this.coordinates);
   }
 });
 /*appunti prima di iniziare
@@ -5245,8 +5286,76 @@ Dopo ogni cambiamento viene fatta una chiamata ajax con i parametri presenti nel
 
 /***/ }),
 
+<<<<<<< HEAD
 =======
 >>>>>>> test
+=======
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchbarComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SearchbarComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./resources/js/app.js");
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      apikey: "Oe8qW7UX2GW9LFGSM2ePZNH5D3IpOBqK",
+      coordinates: {
+        lat: null,
+        lon: null
+      },
+      pippot: "stringa di pippo"
+    };
+  },
+  methods: {
+    createSearchbox: function createSearchbox() {
+      var _this = this;
+
+      var options = {
+        searchOptions: {
+          key: this.apikey,
+          language: "it-IT",
+          limit: 5
+        },
+        autocompleteOptions: {
+          key: this.apikey,
+          language: "it-IT"
+        }
+      };
+      var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
+      var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
+      document.getElementById("searchbar").append(searchBoxHTML);
+      ttSearchBox.on("tomtom.searchbox.resultselected", function (data) {
+        console.log(data.data.result.position);
+
+        _this.$set(_this.coordinates, "lat", data.data.result.position.lat);
+
+        _this.$set(_this.coordinates, "lon", data.data.result.position.lng);
+
+        _app__WEBPACK_IMPORTED_MODULE_0__["Bus"].$emit("sendCoordinates", _this.coordinates);
+      });
+    },
+    sendFunction: function sendFunction() {
+      console.log("click");
+    }
+  },
+  mounted: function mounted() {
+    this.createSearchbox();
+  }
+});
+
+/***/ }),
+
+>>>>>>> f0986030f1a898908cf579329f4f59715ae8b854
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.esm.js":
 /*!*********************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.esm.js ***!
@@ -41600,11 +41709,8 @@ var render = function () {
               [
                 _c(
                   "label",
-                  {
-                    staticClass: "form-label",
-                    attrs: { for: "square_meters" },
-                  },
-                  [_vm._v("n Bagni min")]
+                  { staticClass: "form-label", attrs: { for: "n_bed" } },
+                  [_vm._v("n letti min")]
                 ),
                 _vm._v(" "),
                 _c("input", {
@@ -41612,8 +41718,8 @@ var render = function () {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.n_bathroom,
-                      expression: "n_bathroom",
+                      value: _vm.n_bed,
+                      expression: "n_bed",
                     },
                   ],
                   staticClass: "form-control",
@@ -41621,18 +41727,63 @@ var render = function () {
                     type: "number",
                     min: "0",
                     max: "5000",
-                    name: "n_bathroom",
-                    id: "n_bathroom",
-                    "aria-describedby": "n_bathroomHelper",
+                    name: "n_bed",
+                    id: "n_bed",
+                    "aria-describedby": "n_bedHelper",
                     placeholder: "0",
                   },
-                  domProps: { value: _vm.n_bathroom },
+                  domProps: { value: _vm.n_bed },
                   on: {
                     input: function ($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.n_bathroom = $event.target.value
+                      _vm.n_bed = $event.target.value
+                    },
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "mx-2 mb-3",
+                staticStyle: { "max-width": "70px" },
+              },
+              [
+                _c(
+                  "label",
+                  { staticClass: "form-label", attrs: { for: "distance" } },
+                  [_vm._v("raggio distanza in km")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.distance,
+                      expression: "distance",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    min: "20",
+                    max: "5000",
+                    name: "distance",
+                    id: "distance",
+                    "aria-describedby": "distanceHelper",
+                    placeholder: "0",
+                  },
+                  domProps: { value: _vm.distance },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.distance = $event.target.value
                     },
                   },
                 }),
@@ -41708,7 +41859,84 @@ var render = function () {
         ]),
       ]),
     ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row" },
+      _vm._l(_vm.apartments, function (apartment) {
+        return _c(
+          "a",
+          {
+            key: apartment.id,
+            staticClass: "card justify-content-between card_promo m-3",
+            attrs: { href: "#" },
+          },
+          [
+            _c("img", {
+              staticClass: "card-img-top thumb",
+              attrs: {
+                src: "storage/" + apartment.image,
+                alt: "Card image cap",
+              },
+            }),
+            _vm._v(" "),
+            _c("p", { staticClass: "promo" }, [_vm._v("Promotion")]),
+            _vm._v(" "),
+            _c("h2", { staticClass: "card-text m-3 card_title" }, [
+              _vm._v(_vm._s(apartment.title)),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "box" }, [
+              _c("p", { staticClass: "card-text m-3" }, [
+                _vm._v(_vm._s(apartment.description)),
+              ]),
+            ]),
+            _vm._v(" "),
+            _vm._m(0, true),
+          ]
+        )
+      }),
+      0
+    ),
   ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "button_details p-2 w-50 justify-content-center align-items-center text-center text-white m-auto mt-4 mb-4",
+      },
+      [_c("span", [_vm._v("View details")])]
+    )
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchbarComponent.vue?vue&type=template&id=ad8cff06&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SearchbarComponent.vue?vue&type=template&id=ad8cff06& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "w-75", attrs: { id: "searchbar" } })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -53934,14 +54162,21 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: Bus */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bus", function() { return Bus; });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -53956,15 +54191,22 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Vue.component('advanced-search', __webpack_require__(/*! ./components/AdvancedSearch.vue */ "./resources/js/components/AdvancedSearch.vue")["default"]);
 =======
 >>>>>>> test
+=======
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('advanced-search', __webpack_require__(/*! ./components/AdvancedSearch.vue */ "./resources/js/components/AdvancedSearch.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('searchbarComponent', __webpack_require__(/*! ./components/SearchbarComponent.vue */ "./resources/js/components/SearchbarComponent.vue")["default"]);
+var Bus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
+>>>>>>> f0986030f1a898908cf579329f4f59715ae8b854
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+<<<<<<< HEAD
 var app = new Vue({
   el: '#app',
   data: {},
@@ -53983,6 +54225,10 @@ var app = new Vue({
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
   }
+=======
+var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
+  el: '#app'
+>>>>>>> f0986030f1a898908cf579329f4f59715ae8b854
 });
 
 /***/ }),
@@ -54102,8 +54348,80 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+<<<<<<< HEAD
 =======
 >>>>>>> test
+=======
+/***/ "./resources/js/components/SearchbarComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/SearchbarComponent.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SearchbarComponent_vue_vue_type_template_id_ad8cff06___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SearchbarComponent.vue?vue&type=template&id=ad8cff06& */ "./resources/js/components/SearchbarComponent.vue?vue&type=template&id=ad8cff06&");
+/* harmony import */ var _SearchbarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SearchbarComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/SearchbarComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SearchbarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SearchbarComponent_vue_vue_type_template_id_ad8cff06___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SearchbarComponent_vue_vue_type_template_id_ad8cff06___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/SearchbarComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/SearchbarComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/SearchbarComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchbarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SearchbarComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchbarComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchbarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/SearchbarComponent.vue?vue&type=template&id=ad8cff06&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/SearchbarComponent.vue?vue&type=template&id=ad8cff06& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchbarComponent_vue_vue_type_template_id_ad8cff06___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SearchbarComponent.vue?vue&type=template&id=ad8cff06& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchbarComponent.vue?vue&type=template&id=ad8cff06&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchbarComponent_vue_vue_type_template_id_ad8cff06___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchbarComponent_vue_vue_type_template_id_ad8cff06___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+>>>>>>> f0986030f1a898908cf579329f4f59715ae8b854
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!

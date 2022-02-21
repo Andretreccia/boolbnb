@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Vue from 'vue';
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -20,6 +22,10 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('advanced-search', require('./components/AdvancedSearch.vue').default);
+Vue.component('searchbarComponent', require('./components/SearchbarComponent.vue').default);
+
+
+export const Bus = new Vue();
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

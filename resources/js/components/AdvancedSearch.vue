@@ -39,19 +39,35 @@
                             />
                         </div>
                         <div style="max-width: 70px" class="mx-2 mb-3">
-                            <label for="square_meters" class="form-label"
-                                >n Bagni min</label
+                            <label for="n_bed" class="form-label"
+                                >n letti min</label
                             >
                             <input
                                 type="number"
                                 min="0"
                                 max="5000"
                                 class="form-control"
-                                name="n_bathroom"
-                                id="n_bathroom"
-                                aria-describedby="n_bathroomHelper"
+                                name="n_bed"
+                                id="n_bed"
+                                aria-describedby="n_bedHelper"
                                 placeholder="0"
-                                v-model="n_bathroom"
+                                v-model="n_bed"
+                            />
+                        </div>
+                        <div style="max-width: 70px" class="mx-2 mb-3">
+                            <label for="distance" class="form-label"
+                                >raggio distanza in km</label
+                            >
+                            <input
+                                type="number"
+                                min="20"
+                                max="5000"
+                                class="form-control"
+                                name="distance"
+                                id="distance"
+                                aria-describedby="distanceHelper"
+                                placeholder="0"
+                                v-model="distance"
                             />
                         </div>
                         <div>
@@ -79,52 +95,76 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <a
+                href="#"
+                class="card justify-content-between card_promo m-3"
+                v-for="apartment in apartments"
+                :key="apartment.id"
+            >
+                <img
+                    class="card-img-top thumb"
+                    :src="'storage/' + apartment.image"
+                    alt="Card image cap"
+                />
+                <p class="promo">Promotion</p>
+                <h2 class="card-text m-3 card_title">{{ apartment.title }}</h2>
+                <div class="box">
+                    <p class="card-text m-3">{{ apartment.description }}</p>
+                </div>
+
+                <div
+                    class="button_details p-2 w-50 justify-content-center align-items-center text-center text-white m-auto mt-4 mb-4"
+                >
+                    <span>View details</span>
+                </div>
+            </a>
+        </div>
     </div>
 </template>
 
 <script>
+import { Bus } from "../app";
 export default {
     data() {
         return {
-            pippo: [],
+            apartments: [],
             userInput: "",
-            n_bathroom: "",
+            n_bed: "",
             n_rooms: "",
             v_services: [],
+            coordinates: {},
+            distance: null,
         };
     },
     props: { services: Array },
+
     methods: {
         searchFunction() {
-            /* console.log(this.pippoutente)
-                console.log('pippo function consolelog') */
             console.log(this.userInput);
             axios
-                //.get('/api/apartments' + '?address=' + this.userInput )
-                //.get(`/api/apartments?address=${this.userinput}`
                 .get(
-                    /*  "/api/apartments?n_rooms=" +
-                        //this.n_bathroom +
-                        "&n_rooms=" +
-                        this.n_rooms */
-                    `/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bathroom=${this.n_bathroom}`
+                    `/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bed=${this.n_bed}&services=${this.v_services}&latitude=${this.coordinates.lat}&longitude=${this.coordinates.lon}&distance=${this.distance}`
                 )
                 .then((response) => {
-                    this.pippo = response.data;
-                    console.log(this.pippo);
+                    this.apartments = response.data.data;
+                    console.log(this.apartments);
                     console.log(this.n_rooms);
                     console.log(this.n_rooms);
                 })
                 .catch((error) => {
-                    console.log(error, "Pippo non funge fra");
+                    console.log(error, "non funziona");
                 });
         },
         serviceFunction() {
-            console.log(this.v_services);
+            console.log(this.coordinates);
         },
-        pippoFunction(i) {
-            console.log(this.service[i]);
-        },
+    },
+    created() {
+        Bus.$on("sendCoordinates", (data) => {
+            this.coordinates = data;
+        });
+        console.log(this.coordinates);
     },
 };
 /*appunti prima di iniziare
