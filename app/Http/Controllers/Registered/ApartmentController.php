@@ -46,30 +46,31 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'address' => 'required|unique:apartments',
-            'title' => 'required',
-            'image' => 'nullable|image|max:500',
-            'description' => 'nullable',
-            'n_rooms' => 'nullable|numeric',
-            'n_bathroom' => 'nullable|numeric',
-            'n_bed' => 'nullable|numeric',
-            'square_meters' => 'nullable|numeric',
+            'address' => 'required|max:255',
+            'title' => 'required|max:255',
+            'image' => 'required|image|max:500',
+            'description' => 'nullable|max:65535',
+            'n_rooms' => 'required|numeric|min:0|max:200',
+            'n_bathroom' => 'required|numeric|min:0|max:200',
+            'n_bed' => 'required|numeric|min:0|max:200',
+            'square_meters' => 'required|numeric|min:0|max:5000',
             'visibility' => 'boolean',
             'latitude' => 'required',
             'longitude' => 'required',
+            'services' => 'required',
 
         ]);
 
         if ($request->file('image')) {
             $image = Storage::put('apartments_images', $request->file('image'));
-
             $validate['image'] = $image;
         }
 
-        $validate['slug'] = Str::slug($validate['address']);
-
+        // ddd($request->id);
         $validate['user_id'] = Auth::id();
-
+        //ddd(Apartment::latest()->first()->id);
+        $apartment_id = Apartment::latest()->first()->id + 1;
+        $validate['slug'] = Str::slug($validate['title'] . '-' . $apartment_id);
         $apartment = Apartment::create($validate);
 
         if ($request->has('services')) {
@@ -90,8 +91,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        $choose_services_array = $apartment->services;
-        return view('guest.apartments.show', compact('apartment','choose_services_array'));
+        // return view('guest.apartments.show', compact('apartment'));
     }
 
     /**
@@ -121,33 +121,29 @@ class ApartmentController extends Controller
     {
         if (Auth::id() === $apartment->user_id) {
             $validate = $request->validate([
-                'address' => [
-                    'required',
-                    Rule::unique('apartments')->ignore($apartment->id)
-                ],
-                'title' => 'required',
-                'image' => 'nullable|image|max:500',
-                'description' => 'nullable',
-                'n_rooms' => 'nullable|numeric',
-                'n_bathroom' => 'nullable|numeric',
-                'n_bed' => 'nullable|numeric',
-                'square_meters' => 'nullable|numeric',
-                'visibility' => 'boolean'
+                'address' => 'required|max:255',
+                'title' => 'required|max:255',
+                'image' => 'image|max:500',
+                'description' => 'nullable|max:65535',
+                'n_rooms' => 'required|numeric|min:0|max:200',
+                'n_bathroom' => 'required|numeric|min:0|max:200',
+                'n_bed' => 'required|numeric|min:0|max:200',
+                'square_meters' => 'required|numeric|min:0|max:5000',
+                'visibility' => 'boolean',
+                'latitude' => 'required',
+                'longitude' => 'required',
+                'services' => 'required',
             ]);
-
             if ($request->file('image')) {
                 Storage::delete($apartment->image);
                 $image = Storage::put('apartments_images', $request->file('image'));
-
                 $validate['image'] = $image;
             }
-
-            $validate['slug'] = Str::slug($validate['address']);
-
+            $validate['slug'] = Str::slug($validate['title'] . '-' . $apartment->id, '-');
             $apartment->update($validate);
             $apartment->services()->sync($request->services);
 
-            return redirect()->route('registered.apartments.index')->with('message', "Hai modificato l'appartamento $apartment->address con successo.");
+            return redirect()->route('registered.apartments.index')->with('message', "Hai modificato l'appartamento in $apartment->address con successo.");
         } else {
             abort(403);
         }
@@ -165,7 +161,7 @@ class ApartmentController extends Controller
             Storage::delete($apartment->image);
             $apartment->delete();
 
-            return redirect()->route('registered.apartments.index')->with('message', "Hai eliminato l'appartamento $apartment->address con successo.");
+            return redirect()->route('registered.apartments.index')->with('message', "Hai eliminato l'appartamento in $apartment->address con successo.");
         } else {
             abort(403);
         }

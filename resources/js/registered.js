@@ -22,6 +22,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('input-address-create', require('./components/InputAddressCreate.vue').default);
+Vue.component('edit-visibility-checkbox', require('./components/editVisibilityComoponent.vue').default);
 
 
 /**

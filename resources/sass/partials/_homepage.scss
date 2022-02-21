@@ -1,7 +1,25 @@
 .hero_image {
-    margin-top: -110px;
-    height: 100vh;
+    margin-top: -150px;
+    height: 1000px;
     background-image: url(../img/home.jpeg);
+    background-color: $darkazure;
     background-position: center;
-    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+//Responsive
+@media (max-width: 576px) {
+    .hero_image {
+        background-position: top;
+        background-size: cover;
+        height: 400px;
+    }
+}
+
+@media (max-width: 320px) {
+    .hero_image {
+        background-position: top;
+        background-size: cover;
+        height: 400px;
+    }
 }

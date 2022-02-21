@@ -11451,3 +11451,105 @@ textarea.form-control-lg {
   background-color: #6cb2eb;
   cursor: pointer;
 }
+
+.card_promo {
+  width: 25%;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: "Inter";
+  color: black;
+}
+.card_promo:hover {
+  color: black;
+  box-shadow: 5px 10px 18px #ced4da;
+}
+.card_promo .thumb {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  height: 200px;
+  position: relative;
+}
+.card_promo .promo {
+  position: absolute;
+  background-color: #f6993f;
+  border-radius: 50px;
+  right: 5px;
+  top: 5px;
+  font-size: 12px;
+  padding: 0.5rem 0.8rem;
+  color: white;
+  font-weight: bold;
+}
+.card_promo .card_title {
+  font-weight: bold;
+  font-size: 15px;
+}
+.card_promo .service {
+  font-weight: bold;
+  font-size: 13px;
+}
+.card_promo .label_card {
+  background-color: #bad5db;
+  border-radius: 15px;
+}
+.card_promo .label_card .icon_name {
+  color: #31858f;
+}
+.card_promo .button_details {
+  background-color: #ce5c0b;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+@media (max-width: 991px) {
+  .card {
+    width: 30%;
+  }
+}
+@media (max-width: 576px) {
+  .card {
+    width: 43%;
+  }
+}
+@media (max-width: 320px) {
+  .card {
+    width: 100%;
+  }
+}
+.site_footer {
+  background-color: #f1f1f3;
+  min-height: 350px;
+}
+.site_footer .title_footer {
+  font-family: "Inter";
+  font-weight: bold;
+}
+.site_footer .menu_footer {
+  padding-left: 0;
+  line-height: 2rem;
+}
+.site_footer .menu_footer li {
+  list-style: none;
+}
+.site_footer .menu_footer li a {
+  font-family: "Inter";
+  text-decoration: none;
+  color: #666666;
+}
+.site_footer .menu_footer li a:hover {
+  color: #31858f;
+}
+.site_footer .line {
+  width: 100%;
+  border-bottom: 1px solid #ced4da;
+}
+.site_footer .copyright {
+  font-family: "Inter";
+  color: #666666;
+}
+.site_footer .copyright .social_icon {
+  cursor: pointer;
+}
+.site_footer .copyright .social_icon:hover {
+  filter: invert(42%) sepia(42%) saturate(596%) hue-rotate(138deg) brightness(97%) contrast(88%);
+}

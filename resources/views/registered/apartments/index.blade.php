@@ -13,7 +13,8 @@
             </div>
         @endif
         <div class="text-end mb-3">
-            <a class="btn btn-primary" href="{{ route('registered.apartments.create') }}" role="button">Inserisci un
+            <a class="btn btn-primary text-white" href="{{ route('registered.apartments.create') }}"
+                role="button">Inserisci un
                 Appartemento</a>
         </div>
         <div class="table-responsive">
@@ -23,6 +24,7 @@
                         <th scope="col">Id</th>
                         <th scope="col">Indirizzo</th>
                         <th scope="col">Immagine</th>
+                        <th scope="col">Visibilità</th>
                         <th scope="col">Creato il</th>
                         <th scope="col">Aggiornato il</th>
                         <th scope="col">Azioni</th>
@@ -37,17 +39,28 @@
                                 <img height="50" src="{{ asset('storage/' . $apartment->image) }}"
                                     alt="{{ $apartment->title }}">
                             </td>
+                            <td>
+                                @if ($apartment->visibility === 1)
+                                    <div class="visibility ">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </div>
+                                @else
+                                    <div class="novisibility ">
+                                        <i class="fa-solid fa-eye-slash"></i>
+                                    </div>
+                                @endif
+                            </td>
                             <td>{{ $apartment->created_at }}</td>
                             <td>{{ $apartment->updated_at }}</td>
                             <td>
-                                <a href="{{ route('registered.apartments.show', $apartment->id) }}"
-                                    class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('guest.apartments.show', $apartment->slug) }}"
+                                    class="btn btn-primary"><i class="fas fa-eye text-white"></i></a>
                                 <a href="{{ route('registered.apartments.edit', $apartment->id) }}"
                                     class="btn btn-secondary"><i class="fas fa-pencil-alt"></i></a>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#delete{{ $apartment->id }}">
-                                    <i class="fas fa-trash"></i>
+                                    <i class="fas fa-trash text-white"></i>
                                 </button>
 
                                 <!-- Modal -->

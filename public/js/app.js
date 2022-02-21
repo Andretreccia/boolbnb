@@ -5089,6 +5089,7 @@ module.exports = {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AdvancedSearch.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AdvancedSearch.vue?vue&type=script&lang=js& ***!
@@ -5244,6 +5245,8 @@ Dopo ogni cambiamento viene fatta una chiamata ajax con i parametri presenti nel
 
 /***/ }),
 
+=======
+>>>>>>> test
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.esm.js":
 /*!*********************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.esm.js ***!
@@ -41473,6 +41476,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AdvancedSearch.vue?vue&type=template&id=1b0282d6&":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AdvancedSearch.vue?vue&type=template&id=1b0282d6& ***!
@@ -41825,6 +41829,8 @@ function normalizeComponent (
 
 /***/ }),
 
+=======
+>>>>>>> test
 /***/ "./node_modules/vue/dist/vue.common.dev.js":
 /*!*************************************************!*\
   !*** ./node_modules/vue/dist/vue.common.dev.js ***!
@@ -53949,7 +53955,10 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+<<<<<<< HEAD
 Vue.component('advanced-search', __webpack_require__(/*! ./components/AdvancedSearch.vue */ "./resources/js/components/AdvancedSearch.vue")["default"]);
+=======
+>>>>>>> test
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -53957,7 +53966,23 @@ Vue.component('advanced-search', __webpack_require__(/*! ./components/AdvancedSe
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {},
+  mounted: function mounted() {
+    var password = document.getElementById("password"),
+        confirm_password = document.getElementById("password-confirm");
+
+    function validatePassword() {
+      if (password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("La password non corrisponde");
+      } else {
+        confirm_password.setCustomValidity('');
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+  }
 });
 
 /***/ }),
@@ -54007,6 +54032,7 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./resources/js/components/AdvancedSearch.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/AdvancedSearch.vue ***!
@@ -54076,6 +54102,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+=======
+>>>>>>> test
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -54105,9 +54133,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\progetto-finale\boolbnb\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\progetto-finale\boolbnb\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel\progetto-finale\boolbnb\resources\sass\registered.scss */"./resources/sass/registered.scss");
+__webpack_require__(/*! C:\Users\samud\Desktop\Esercizi\boolbnb\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\samud\Desktop\Esercizi\boolbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\samud\Desktop\Esercizi\boolbnb\resources\sass\registered.scss */"./resources/sass/registered.scss");
 
 
 /***/ })

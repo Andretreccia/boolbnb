@@ -2,7 +2,7 @@
   <div>
     <div class="mb-3">
       <div class="d-flex">
-        <label for="address" class="form-label">Indirizzo</label>
+        <label for="address" class="form-label">Indirizzo*</label>
         <i
           v-bind:class="
             (adressSelection == false && oldAddress === null) ||
@@ -22,6 +22,8 @@
         id="address"
         aria-describedby="addressHelper"
         placeholder="Inserisci l'indirizzo"
+        maxlength="255"
+        required
       />
       <small id="addressHelper" class="form-text text-muted">
         Scrivi l'indirizzo dell'appartamento, max 255 caratteri
@@ -29,7 +31,10 @@
     </div>
 
     <!--------------------------- opzioni vincolate scelta adress -------------------------->
-    <div :class="results.length >= 1 ? 'border' : ''">
+    <div v-if="results.length >= 1" class="border px-2">
+      <small id="resultHelper" class="form-text text-muted">
+        Seleziona l'indirizzo dell'appartamento
+      </small>
       <div class="hover_blue" v-for="result in results" v-bind:key="result.id">
         <span v-on:click="selectAdress(result)">{{
           result.address.freeformAddress
@@ -40,7 +45,7 @@
     <!------------------------------------------------------------------------------------->
 
     <!--------------------------- form autocompletato d-none coordinate-------------------------->
-    <div class="mb-3">
+    <div class="mb-3 d-none">
       <label for="latitude" class="form-label">Latitudine</label>
       <input
         id="latitude"
@@ -54,7 +59,7 @@
       <small id="latitudeId" class="text-muted">latitude</small>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 d-none">
       <label for="longitude" class="form-label">Longitudine</label>
       <input
         id="longitude"
@@ -70,12 +75,6 @@
     <!------------------------------------------------------------------------------------->
   </div>
 </template>
-
-
-
-
-
-
 
 <script>
 export default {

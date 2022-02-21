@@ -1,10 +1,9 @@
 <nav class="home navbar-expand-md navbar-light px-5">
     <div class="container navbar">
         <a href="{{ url('/') }}">
-            <img height="50" src="{{ asset('img/logo.svg') }}" alt="Logo">
+            <img class="logo" height="50" src="{{ asset('img/logo_white.svg') }}" alt="Logo">
         </a>
-        <a href="{{route('advanced.search')}}" class="link_adv">Advanced search</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -13,8 +12,9 @@
             <!-- Left Side Of Navbar -->
             <form class="d-flex m-auto align-items-center">
                 <div class="search_bar d-flex m-auto align-items-center">
-                   <input class="form-control me-2 search" type="search" placeholder="Search an apartment" aria-label="Search">
-                   <i class="fa-solid fa-magnifying-glass fa-lg search_icon"></i>
+                    <input class="form-control me-2 search" type="search" placeholder="Search an apartment"
+                        aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass fa-lg search_icon"></i>
                 </div>
 
 
@@ -34,7 +34,7 @@
                     @endif
                 @else
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        <a id="navbarDropdown" class="text-white email dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->email }}
                         </a>
@@ -44,7 +44,7 @@
                             <a class="dropdown-item" href="{{ route('registered.dashboard') }}">Dashboard</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
-                                                                                 document.getElementById('logout-form').submit();">
+                                                                                         document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 

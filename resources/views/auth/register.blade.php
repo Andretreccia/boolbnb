@@ -14,11 +14,11 @@
 
 
                             <div class="form-group row pb-2">
-                                <label for="email"
-                                    class="col-md-6 col-form-label text-md-right title_input">
+                                <label for="email" class="col-md-6 col-form-label text-md-right title_input">
                                     <p class="rule">I campi con l'asterisco sono obbligatori.</p>
                                     <span class="symbol">*</span>
-                                    {{ __('E-Mail Address') }}</label>
+                                    {{ __('E-Mail Address') }}
+                                </label>
 
                                 <div class="col-md-6 input_value">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -33,15 +33,14 @@
                             </div>
 
                             <div class="form-group row pb-2">
-                                <label for="password"
-                                    class="col-md-6 col-form-label text-md-right title_input">
+                                <label for="password" class="col-md-6 col-form-label text-md-right title_input">
                                     <span class="symbol">*</span>
                                     {{ __('Password') }}</label>
 
                                 <div class="col-md-6 input_value">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="new-password">
+                                        required autocomplete="new-password" minlength="8">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -52,8 +51,7 @@
                             </div>
 
                             <div class="form-group row pb-2">
-                                <label for="password-confirm"
-                                    class="col-md-6 col-form-label text-md-right title_input">
+                                <label for="password-confirm" class="col-md-6 col-form-label text-md-right title_input">
                                     <span class="symbol">*</span>
                                     {{ __('Confirm Password') }}</label>
 
@@ -64,7 +62,8 @@
                             </div>
 
                             <div class="form-group row pb-2">
-                                <label for="name" class="col-md-6 col-form-label text-md-right title_input">{{ __('Name') }}</label>
+                                <label for="name"
+                                    class="col-md-6 col-form-label text-md-right title_input">{{ __('Name') }}</label>
 
                                 <div class="col-md-6 input_value">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"

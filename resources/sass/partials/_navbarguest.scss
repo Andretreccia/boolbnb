@@ -11,6 +11,9 @@
         font-family: "Inter";
         border-radius: 50px;
     }
+    .email {
+        text-decoration: none;
+    }
     .search_bar {
         width: 300px;
         height: 40px;
@@ -55,5 +58,14 @@
         font-size: 15px;
         font-family: "Inter";
         border-radius: 50px;
+    }
+}
+
+//Responsive
+@media (max-width: 320px) {
+    .home {
+        .search_bar {
+            width: 220px;
+        }
     }
 }
