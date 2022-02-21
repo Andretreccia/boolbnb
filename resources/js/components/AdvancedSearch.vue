@@ -39,7 +39,7 @@
                             />
                         </div>
                         <div style="max-width: 70px" class="mx-2 mb-3">
-                            <label for="square_meters" class="form-label"
+                            <label for="n_bed" class="form-label"
                                 >n letti min</label
                             >
                             <input
@@ -52,6 +52,22 @@
                                 aria-describedby="n_bedHelper"
                                 placeholder="0"
                                 v-model="n_bed"
+                            />
+                        </div>
+                        <div style="max-width: 70px" class="mx-2 mb-3">
+                            <label for="distance" class="form-label"
+                                >raggio distanza in km</label
+                            >
+                            <input
+                                type="number"
+                                min="20"
+                                max="5000"
+                                class="form-control"
+                                name="distance"
+                                id="distance"
+                                aria-describedby="distanceHelper"
+                                placeholder="0"
+                                v-model="distance"
                             />
                         </div>
                         <div>
@@ -118,27 +134,17 @@ export default {
             n_rooms: "",
             v_services: [],
             coordinates: {},
-            pippo: null,
+            distance: null,
         };
     },
     props: { services: Array },
 
     methods: {
         searchFunction() {
-            /* console.log(this.pippoutente)
-                console.log('pippo function consolelog') */
             console.log(this.userInput);
             axios
-                //.get('/api/apartments' + '?address=' + this.userInput )
-                //.get(`/api/apartments?address=${this.userinput}`
                 .get(
-                    /*  "/api/apartments?n_rooms=" +
-                        //this.n_bed +
-                        "&n_rooms=" +
-                        this.n_rooms */
-                    //`/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bed=${this.n_bed}`
-                    //`/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bed=${this.n_bed}&services=${this.v_services}`
-                    `/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bed=${this.n_bed}&services=${this.v_services}&latitude=${this.coordinates.lat}&longitude=${this.coordinates.lon}`
+                    `/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bed=${this.n_bed}&services=${this.v_services}&latitude=${this.coordinates.lat}&longitude=${this.coordinates.lon}&distance=${this.distance}`
                 )
                 .then((response) => {
                     this.apartments = response.data.data;
@@ -147,14 +153,11 @@ export default {
                     console.log(this.n_rooms);
                 })
                 .catch((error) => {
-                    console.log(error, "Pippo non funge fra");
+                    console.log(error, "non funziona");
                 });
         },
         serviceFunction() {
             console.log(this.coordinates);
-        },
-        pippoFunction(i) {
-            console.log(this.service[i]);
         },
     },
     created() {

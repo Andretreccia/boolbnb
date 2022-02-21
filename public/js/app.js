@@ -5208,6 +5208,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5218,7 +5234,7 @@ __webpack_require__.r(__webpack_exports__);
       n_rooms: "",
       v_services: [],
       coordinates: {},
-      pippo: null
+      distance: null
     };
   },
   props: {
@@ -5228,32 +5244,18 @@ __webpack_require__.r(__webpack_exports__);
     searchFunction: function searchFunction() {
       var _this = this;
 
-      /* console.log(this.pippoutente)
-          console.log('pippo function consolelog') */
       console.log(this.userInput);
-      axios //.get('/api/apartments' + '?address=' + this.userInput )
-      //.get(`/api/apartments?address=${this.userinput}`
-      .get(
-      /*  "/api/apartments?n_rooms=" +
-          //this.n_bed +
-          "&n_rooms=" +
-          this.n_rooms */
-      //`/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bed=${this.n_bed}`
-      //`/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bed=${this.n_bed}&services=${this.v_services}`
-      "/api/apartments?address=".concat(this.userInput, "&n_rooms=").concat(this.n_rooms, "&n_bed=").concat(this.n_bed, "&services=").concat(this.v_services, "&latitude=").concat(this.coordinates.lat, "&longitude=").concat(this.coordinates.lon)).then(function (response) {
+      axios.get("/api/apartments?address=".concat(this.userInput, "&n_rooms=").concat(this.n_rooms, "&n_bed=").concat(this.n_bed, "&services=").concat(this.v_services, "&latitude=").concat(this.coordinates.lat, "&longitude=").concat(this.coordinates.lon, "&distance=").concat(this.distance)).then(function (response) {
         _this.apartments = response.data.data;
         console.log(_this.apartments);
         console.log(_this.n_rooms);
         console.log(_this.n_rooms);
       })["catch"](function (error) {
-        console.log(error, "Pippo non funge fra");
+        console.log(error, "non funziona");
       });
     },
     serviceFunction: function serviceFunction() {
       console.log(this.coordinates);
-    },
-    pippoFunction: function pippoFunction(i) {
-      console.log(this.service[i]);
     }
   },
   created: function created() {
@@ -41700,10 +41702,7 @@ var render = function () {
               [
                 _c(
                   "label",
-                  {
-                    staticClass: "form-label",
-                    attrs: { for: "square_meters" },
-                  },
+                  { staticClass: "form-label", attrs: { for: "n_bed" } },
                   [_vm._v("n letti min")]
                 ),
                 _vm._v(" "),
@@ -41733,6 +41732,51 @@ var render = function () {
                         return
                       }
                       _vm.n_bed = $event.target.value
+                    },
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "mx-2 mb-3",
+                staticStyle: { "max-width": "70px" },
+              },
+              [
+                _c(
+                  "label",
+                  { staticClass: "form-label", attrs: { for: "distance" } },
+                  [_vm._v("raggio distanza in km")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.distance,
+                      expression: "distance",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    min: "20",
+                    max: "5000",
+                    name: "distance",
+                    id: "distance",
+                    "aria-describedby": "distanceHelper",
+                    placeholder: "0",
+                  },
+                  domProps: { value: _vm.distance },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.distance = $event.target.value
                     },
                   },
                 }),

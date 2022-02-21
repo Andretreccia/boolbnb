@@ -36,6 +36,7 @@ class ApartmentController extends Controller
         $reqServices = explode(',', $request->services);
         $latitude = $request->latitude;
         $longitude = $request->longitude;
+        $distance = $request->distance;
 
 
         /* funzione per calcolare la distanza */
@@ -43,6 +44,7 @@ class ApartmentController extends Controller
         {
             $distance = (3958 * 3.1415926 * sqrt(($lat2 - $lat1) * ($lat2 - $lat1) + cos($lat2 / 57.29578) * cos($lat1 / 57.29578) * ($lon2 - $lon1) * ($lon2 - $lon1)) / 180);
             return $distance * 1.852; //Converto miglia in chilometri
+
         };
 
 
@@ -57,7 +59,7 @@ class ApartmentController extends Controller
             $aparts = Apartment::where('n_bed', '>', $requestQuery['n_bed'])
                 ->where('n_rooms', '>', $requestQuery['n_rooms'])
                 ->whereHas('services', function ($param) use ($reqServices) {
-                    $param->orWhereIn('service_id', $reqServices);
+                    $param->WhereIn('service_id', $reqServices);
                 })->get();
         }
         /* condizione by pizzi per la distanza */
@@ -66,7 +68,7 @@ class ApartmentController extends Controller
             foreach ($aparts as $apartment) {
                 $distanceApartment = calcDist($latitude, $longitude, $apartment->latitude, $apartment->longitude);
 
-                if ($distanceApartment < 20 || ($latitude === null && $longitude === null)) {
+                if ($distanceApartment < $distance || ($latitude === null && $longitude === null)) {
                     $filterByDistance[] = $apartment;
                 }
             }
