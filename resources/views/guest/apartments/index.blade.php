@@ -4,6 +4,7 @@
     <div class="container-fluid d-flex justify-content-center hero_image">
     </div>
     <div class="container-fluid d-flex justify-content-center">
+        <searchbar-component></searchbar-component>
         <div class="container d-flex justify-content-center flex-wrap">
 
             @forelse ($apartments as $apartment)

@@ -40,18 +40,18 @@
                         </div>
                         <div style="max-width: 70px" class="mx-2 mb-3">
                             <label for="square_meters" class="form-label"
-                                >n Bagni min</label
+                                >n letti min</label
                             >
                             <input
                                 type="number"
                                 min="0"
                                 max="5000"
                                 class="form-control"
-                                name="n_bathroom"
-                                id="n_bathroom"
-                                aria-describedby="n_bathroomHelper"
+                                name="n_bed"
+                                id="n_bed"
+                                aria-describedby="n_bedHelper"
                                 placeholder="0"
-                                v-model="n_bathroom"
+                                v-model="n_bed"
                             />
                         </div>
                         <div>
@@ -114,7 +114,7 @@ export default {
         return {
             apartments: [],
             userInput: "",
-            n_bathroom: "",
+            n_bed: "",
             n_rooms: "",
             v_services: [],
             coordinates: {},
@@ -133,11 +133,12 @@ export default {
                 //.get(`/api/apartments?address=${this.userinput}`
                 .get(
                     /*  "/api/apartments?n_rooms=" +
-                        //this.n_bathroom +
+                        //this.n_bed +
                         "&n_rooms=" +
                         this.n_rooms */
-                    //`/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bathroom=${this.n_bathroom}`
-                    `/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bathroom=${this.n_bathroom}&services=${this.v_services}`
+                    //`/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bed=${this.n_bed}`
+                    //`/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bed=${this.n_bed}&services=${this.v_services}`
+                    `/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bed=${this.n_bed}&services=${this.v_services}&latitude=${this.coordinates.lat}&longitude=${this.coordinates.lon}`
                 )
                 .then((response) => {
                     this.apartments = response.data.data;

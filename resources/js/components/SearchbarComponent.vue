@@ -1,7 +1,5 @@
 <template>
-    <div id="searchbar" class="w-75">
-        <button @click="sendFunction()">cLick per inviare</button>
-    </div>
+    <div id="searchbar" class="w-75"></div>
 </template>
 
 <script>
@@ -48,11 +46,10 @@ export default {
                     "lon",
                     data.data.result.position.lng
                 );
-                //console.log(this.coordinates);
+                Bus.$emit("sendCoordinates", this.coordinates);
             });
         },
         sendFunction() {
-            Bus.$emit("sendCoordinates", this.coordinates);
             console.log("click");
         },
     },

@@ -5214,7 +5214,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       apartments: [],
       userInput: "",
-      n_bathroom: "",
+      n_bed: "",
       n_rooms: "",
       v_services: [],
       coordinates: {},
@@ -5235,11 +5235,12 @@ __webpack_require__.r(__webpack_exports__);
       //.get(`/api/apartments?address=${this.userinput}`
       .get(
       /*  "/api/apartments?n_rooms=" +
-          //this.n_bathroom +
+          //this.n_bed +
           "&n_rooms=" +
           this.n_rooms */
-      //`/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bathroom=${this.n_bathroom}`
-      "/api/apartments?address=".concat(this.userInput, "&n_rooms=").concat(this.n_rooms, "&n_bathroom=").concat(this.n_bathroom, "&services=").concat(this.v_services)).then(function (response) {
+      //`/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bed=${this.n_bed}`
+      //`/api/apartments?address=${this.userInput}&n_rooms=${this.n_rooms}&n_bed=${this.n_bed}&services=${this.v_services}`
+      "/api/apartments?address=".concat(this.userInput, "&n_rooms=").concat(this.n_rooms, "&n_bed=").concat(this.n_bed, "&services=").concat(this.v_services, "&latitude=").concat(this.coordinates.lat, "&longitude=").concat(this.coordinates.lon)).then(function (response) {
         _this.apartments = response.data.data;
         console.log(_this.apartments);
         console.log(_this.n_rooms);
@@ -5296,8 +5297,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5333,12 +5332,12 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$set(_this.coordinates, "lat", data.data.result.position.lat);
 
-        _this.$set(_this.coordinates, "lon", data.data.result.position.lng); //console.log(this.coordinates);
+        _this.$set(_this.coordinates, "lon", data.data.result.position.lng);
 
+        _app__WEBPACK_IMPORTED_MODULE_0__["Bus"].$emit("sendCoordinates", _this.coordinates);
       });
     },
     sendFunction: function sendFunction() {
-      _app__WEBPACK_IMPORTED_MODULE_0__["Bus"].$emit("sendCoordinates", this.coordinates);
       console.log("click");
     }
   },
@@ -41705,7 +41704,7 @@ var render = function () {
                     staticClass: "form-label",
                     attrs: { for: "square_meters" },
                   },
-                  [_vm._v("n Bagni min")]
+                  [_vm._v("n letti min")]
                 ),
                 _vm._v(" "),
                 _c("input", {
@@ -41713,8 +41712,8 @@ var render = function () {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.n_bathroom,
-                      expression: "n_bathroom",
+                      value: _vm.n_bed,
+                      expression: "n_bed",
                     },
                   ],
                   staticClass: "form-control",
@@ -41722,18 +41721,18 @@ var render = function () {
                     type: "number",
                     min: "0",
                     max: "5000",
-                    name: "n_bathroom",
-                    id: "n_bathroom",
-                    "aria-describedby": "n_bathroomHelper",
+                    name: "n_bed",
+                    id: "n_bed",
+                    "aria-describedby": "n_bedHelper",
                     placeholder: "0",
                   },
-                  domProps: { value: _vm.n_bathroom },
+                  domProps: { value: _vm.n_bed },
                   on: {
                     input: function ($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.n_bathroom = $event.target.value
+                      _vm.n_bed = $event.target.value
                     },
                   },
                 }),
@@ -41886,19 +41885,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "w-75", attrs: { id: "searchbar" } }, [
-    _c(
-      "button",
-      {
-        on: {
-          click: function ($event) {
-            return _vm.sendFunction()
-          },
-        },
-      },
-      [_vm._v("cLick per inviare")]
-    ),
-  ])
+  return _c("div", { staticClass: "w-75", attrs: { id: "searchbar" } })
 }
 var staticRenderFns = []
 render._withStripped = true
