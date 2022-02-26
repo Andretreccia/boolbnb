@@ -1,13 +1,15 @@
 <template>
     <div
         id="searchbar"
-        class="col-md-6 mb-4 mx-4 search_bar d-flex justify-content-center align-items-center"
+        class="col-md-6 mb-4 mx-4 search_bar d-flex flex-row-reverse justify-content-center align-items-center"
     >
-        <a @click="saveCo()" class="btn btn-primary" href="/research"
-            >Cerca tra in nostri appartamenti!</a
+        <a
+            @click="saveCo()"
+            class="btn py-1 fw-bold search text-white mt-2"
+            href="/research"
+            >Cerca</a
         >
     </div>
-
 </template>
 
 <script>

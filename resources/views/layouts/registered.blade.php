@@ -66,22 +66,22 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"
+                                <a class="nav-link link-active" aria-current="page"
                                     href="{{ route('registered.dashboard') }}">
                                     <span data-feather="home"></span>
                                     Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('registered.apartments.index') }}">
+                                <a class="link" href="{{ route('registered.apartments.index') }}">
                                     <span data-feather="file"></span>
                                     Apartments
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('registered.contacts.index') }}">
+                                <a class="link" href="{{ route('registered.contacts.index') }}">
                                     <span data-feather="file"></span>
-                                    Inbox
+                                    Messages
                                 </a>
                             </li>
 

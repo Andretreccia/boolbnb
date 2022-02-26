@@ -12,7 +12,7 @@
             </div>
         @endif
         <div class="table-responsive-lg">
-            <table class="table table-striped table-sm">
+            <table class="table table-striped table-dark table-hover table-borderless table-sm">
                 <thead>
                     <tr>
                         <th scope="col">Email</th>

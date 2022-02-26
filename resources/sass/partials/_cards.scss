@@ -65,6 +65,26 @@
     }
 }
 
+//Show Cards
+.place {
+    color: $menu;
+}
+.back_icon {
+    background-color: $icona;
+    .icon_show {
+        color: $buttonhover;
+    }
+    .text_service {
+        color: $button;
+    }
+}
+.service_text {
+    color: $darkazure;
+}
+.bg-icon {
+    background-color: $lightazure;
+}
+
 //Responsive
 @media (max-width: 992px) {
     .card_promo {

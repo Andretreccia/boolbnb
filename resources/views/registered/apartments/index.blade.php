@@ -18,7 +18,7 @@
                 Appartamento</a>
         </div>
         <div class="table-responsive-lg">
-            <table class="table table-striped table-sm">
+            <table class="table table-striped table-dark table-hover table-borderless table-sm">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
@@ -54,9 +54,9 @@
                             <td>{{ $apartment->updated_at }}</td>
                             <td>
                                 <a href="{{ route('guest.apartments.show', $apartment->slug) }}"
-                                    class="btn btn-primary"><i class="fas fa-eye text-white"></i></a>
+                                    class="btn btn_show"><i class="fas fa-eye text-white"></i></a>
                                 <a href="{{ route('registered.apartments.edit', $apartment->id) }}"
-                                    class="btn btn-secondary"><i class="fas fa-pencil-alt"></i></a>
+                                    class="btn btn_pencil text-white"><i class="fas fa-pencil-alt"></i></a>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#delete{{ $apartment->id }}">
@@ -95,11 +95,11 @@
                                     </div>
                                 </div>
                                 <a href="{{ route('registered.sponsors.index', $apartment->id) }}"
-                                    class="btn bg-warning">
+                                    class="btn dark_yellow text-white"><i class="fa-solid fa-rectangle-ad"></i>
                                     Sponsorizza
                                 </a>
-                                <a href="{{ route('registered.statistics', $apartment->id) }}" class="btn btn-primary"><i
-                                        class="fas fa-eye text-white"></i>
+                                <a href="{{ route('registered.statistics', $apartment->id) }}" class="btn text-white static"><i
+                                        class="fa-solid fa-chart-line"></i>
                                     Statistiche
                                 </a>
                             </td>

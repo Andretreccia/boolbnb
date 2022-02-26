@@ -1,8 +1,10 @@
 @extends('layouts.registered')
 
 @section('content')
+
     <div class="container">
-        <h2>Visualizzazioni dell'appartamento: {{ $apartment->title }}</h2>
+         <canvas id="myChart" width="400" height="400"></canvas>
+          <h2>Visualizzazioni dell'appartamento: {{ $apartment->title }}</h2>
         <p>
             Totale visualizzazioni di sempre:
             {{ count($apartment->views) }}
@@ -41,7 +43,7 @@
             <span>ott, views:{{count($views_array[1][23][10])}}, messages:, </span>
             <span>nov, views:{{count($views_array[1][23][11])}}, messages:, </span>
             <span>dec, views:{{count($views_array[1][23][12])}}, messages:, </span>
-            <span>2024</span> 
+            <span>2024</span>
             <span>gen, views:{{count($views_array[2][24][1])}}, messages:, </span>
             <span>feb, views:{{count($views_array[2][24][2])}}, messages:, </span>
             <span>mar, views:{{count($views_array[2][24][3])}}, messages:, </span>
@@ -57,11 +59,9 @@
                 *
                 *
                 *
-                --}}     
+                --}}
+
         </div>
-
-
-
-
     </div>
 @endsection
+

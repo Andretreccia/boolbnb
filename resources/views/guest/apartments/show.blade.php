@@ -6,8 +6,8 @@
 
 @section('content')
     <div class="my-5 container">
-        <h2 class="mb-4">{{ $apartment->title }}</h2>
-        <h3><i class="fas fa-map-marker-alt"></i> {{ $apartment->address }}.</h3>
+        <h2 class="mb-3">{{ $apartment->title }}</h2>
+        <p class="fs-6 fw-bold place"><i class="fa-solid fa-location-dot"></i> {{ $apartment->address }}.</p>
         <div class="row">
             <div class="col-12 col-xl-6">
                 <div>
@@ -17,22 +17,22 @@
 
                 <!---------dettagli appartamento bagni, camere, mq, letti --------->
                 <div class='my-5'>
-                    <span class="me-3"><i class="fa-solid fa-person-booth"></i> {{ $apartment->n_rooms }}</span>
-                    <span class="me-3"><i class="fa-solid fa-bed"></i> {{ $apartment->n_bed }}</span>
-                    <span class="me-3"><i class="fa-solid fa-expand"></i> {{ $apartment->square_meters }}
-                        mq</span>
-                    <span class="me-3"><i class="fa-solid fa-toilet"></i> {{ $apartment->n_bathroom }}</span>
+                    <span class="badge p-2 me-3 back_icon"><i class="fa-solid fa-person-booth icon_show"></i> <span class="text_service">{{ $apartment->n_rooms }}</span></span>
+                    <span class="badge p-2 me-3 back_icon"><i class="fa-solid fa-bed icon_show"></i> <span class="text_service"> {{ $apartment->n_bed }}</span></span>
+                    <span class="badge p-2 me-3 back_icon"><i class="fa-solid fa-expand icon_show"></i> <span class="text_service"> {{ $apartment->square_meters }}
+                        mq</span></span>
+                    <span class="badge p-2 me-3 back_icon"><i class="fa-solid fa-toilet icon_show"></i> <span class="text_service"> {{ $apartment->n_bathroom }}</span></span>
 
                     <!--------- servizi --------->
                     <p class="my-3"> Servizi disponibili:
                         @forelse ($apartment->services as $service)
-                            <div class="badge text-black bg-warning ">
+                            <div class="badge p-2 me-3 text-black bg-icon ">
                                 <span>
                                     <img class="mx-2" height="20"
                                         src="{{ asset('img/service_logo/' . $service->icon . '.svg') }}"
                                         alt="{{ $service->name }}">
                                 </span>
-                                <span>
+                                <span class="service_text">
                                     {{ $service->name }}
                                 </span>
 

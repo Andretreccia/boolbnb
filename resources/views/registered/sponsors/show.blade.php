@@ -5,21 +5,23 @@
     <form method="post" id="payment-form"
         action="{{ route('registered.checkout', ['apartment' => $apartment->id, 'sponsor' => $sponsor->id]) }}">
         @csrf
-        <section>
+        <section class="mt-5 form-pay p-4 rounded-3">
             <div>
+                <p class="fs-5">Hai scelto il pacchetto <span class="sponsor_id fw-bold">{{ $sponsor->name }}</span> </p>
                 <span class="input-label">Prezzo</span>
                 <div class="input-wrapper price-wrapper">
-                    <p>{{ $sponsor->price }}€</p>
+                    <p class="fs-4 fw-bold">{{ $sponsor->price }}€</p>
                 </div>
             </div>
 
             <div class="bt-drop-in-wrapper">
                 <div id="bt-dropin"></div>
             </div>
+            <input type="hidden" id="nonce" name="payment-method-nonce" value="{{ $sponsor->price }}">
+        <button class="button btn button_pay text-white" type="submit"><span>Acquista ora!🎉</span></button>
         </section>
 
-        <input type="hidden" id="nonce" name="payment-method-nonce" value="{{ $sponsor->price }}">
-        <button class="button" type="submit"><span>Acquista ora!🎉</span></button>
+
     </form>
 
     <!-- includes the Braintree JS client SDK -->

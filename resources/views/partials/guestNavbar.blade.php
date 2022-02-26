@@ -23,11 +23,8 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav justify-content-end align-items-center">
                 <!-- Authentication Links -->
-                <li class="nav-item mt-2 mx-2">
-                        <a class="login" href="{{ route('advanced.search') }}">Ricerca avanzata</a>
-                    </li>
                 @guest
-                    <li class="nav-item mt-2">
+                    <li class="nav-item">
                         <a class="login" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     @if (Route::has('register'))

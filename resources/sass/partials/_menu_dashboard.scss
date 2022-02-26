@@ -4,6 +4,14 @@
     vertical-align: text-bottom;
 }
 
+//Messages shown
+
+.messages {
+    background-color: $sfondo;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
 /*
    * Sidebar
    */
@@ -15,6 +23,19 @@
     z-index: 0; /* Behind the navbar */
     padding: 0px 0 0; /* Height of navbar */
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+    height: calc(100vh - 66px);
+    background-color: $sidebar;
+    .link {
+        color: $white;
+        display: block;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+            border-color 0.15s ease-in-out;
+    }
+    .link-active {
+        color: $menu;
+    }
 }
 
 @media (max-width: 767.98px) {

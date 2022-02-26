@@ -15,7 +15,7 @@
 
 @import "partials/common";
 
-@import "partials/sponsor";
+@import "partials/sponsorcards";
 
 .checkcross {
     label:before {
@@ -118,10 +118,25 @@ label.toggle-item {
     font-size: 25px;
 }
 
+.btn_show {
+    background-color: $show;
+}
+.btn_pencil {
+    background-color: $pencil;
+}
+
+.static {
+    background-color: $static;
+}
+
+.dark_yellow {
+    background-color: $darkyellow;
+}
+
 .visibility {
-    color: #8bc34a;
+    color: $white;
 }
 
 .novisibility {
-    color: #c34a4a;
+    color: $red;
 }
